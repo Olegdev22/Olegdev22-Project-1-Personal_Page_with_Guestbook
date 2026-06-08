@@ -1,4 +1,4 @@
-<?php
 
-    echo 'Hello from index_get.php';
-  
+     <?php
+
+     renderView('index_get');
