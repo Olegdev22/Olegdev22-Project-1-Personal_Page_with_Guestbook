@@ -13,5 +13,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     badRequest("Email field is invalid.");
 }
 
+connectDB();
+
 var_dump($name, $email, $message);
 die;
