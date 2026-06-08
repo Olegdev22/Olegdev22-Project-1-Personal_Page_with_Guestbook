@@ -21,6 +21,15 @@ function notFound(): void
     exit;
 }
 
+// form
+function badRequest(string $message = "Bad request"): void
+{
+    http_response_code(400);
+    // Handle validation errors
+    echo $message;
+    exit;
+}
+
 // 3) file path - PHP file path
 function getFilePath(string $uri, string $method): string
 {
@@ -45,7 +54,7 @@ function dispatch(string $uri, string $method): void
         include($filePath);
         return;
     }
-    
+
     notFound();
     // 4) If file exists - include it, else return 404
     // 5) Handle the route by including the PHP file
