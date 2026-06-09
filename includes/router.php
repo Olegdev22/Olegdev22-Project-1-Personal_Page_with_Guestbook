@@ -30,6 +30,13 @@ function badRequest(string $message = "Bad request"): void
     exit;
 }
 
+function serverError(string $message = "Server Error"): void
+{
+    http_response_code(500);
+    echo $message;
+    exit;
+};
+
 // 3) file path - PHP file path
 function getFilePath(string $uri, string $method): string
 {
