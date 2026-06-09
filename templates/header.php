@@ -19,3 +19,4 @@
     </nav>
 
     <main>
+        <?php require_once('_flash.php') ?>

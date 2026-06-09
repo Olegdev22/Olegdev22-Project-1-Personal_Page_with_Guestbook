@@ -37,6 +37,11 @@ function serverError(string $message = "Server Error"): void
     exit;
 };
 
+function redirect(string $uri): void   {
+    header("Location: /guestbook");
+    exit();
+}
+
 // 3) file path - PHP file path
 function getFilePath(string $uri, string $method): string
 {
