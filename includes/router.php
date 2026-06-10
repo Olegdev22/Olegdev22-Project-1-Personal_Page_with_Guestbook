@@ -9,6 +9,7 @@ const INDEX_ROUTE = 'index';
 // 1) normalize the URI: GET /questbook -> routes/questbook_get.php
 function normalizeUri(string $uri): string
 {
+    $uri = strtok($uri, '?'); // не реагирует на прописанные вручную параметры
     $uri = strtolower(trim($uri, '/'));
     return $uri === INDEX_URI ? INDEX_ROUTE : $uri;
 }
