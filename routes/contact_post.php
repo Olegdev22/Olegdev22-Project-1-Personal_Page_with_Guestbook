@@ -1,7 +1,7 @@
 <?php
 
 // CSRF protection
-if (!validateCSRFToken($_POST['csrf_token'] ?? null)) {
+if (!validateCSRFToken($_POST['csrfToken'] ?? null)) {
     addFlashMessage('error', 'Sorry pleas send the form again!');
     redirect('/contact');
 }

@@ -19,8 +19,16 @@ function getCSRFTokenAndTime(): array
     ];
 }
 
-function setCSRFTokenAndTime(string $token): void
+function setCSRFTokenAndTime(?string $token): void
 {
+    if ($token === null) {
+        unset(
+            $_SESSION['csrf_token'],
+            $_SESSION['csrf_token_time']
+        );
+        return;
+    }
+
     $_SESSION['csrf_token'] = $token;
     $_SESSION['csrf_token_time'] = time();
 }
@@ -47,5 +55,22 @@ function getCurrentCSRFToken(): string
 
 function validateCSRFToken(?string $token): bool
 {
-    return false;
+    [$storedToken, $time] = getCSRFTokenAndTime();
+
+    if (!isset($storedToken, $time)) {
+        return false;
+    }
+
+    if (isTokenExpired($time)) {
+        setCSRFTokenAndTime(null);
+        return false;
+    }
+
+    // Validate the token
+    $valid = hash_equals($storedToken, $token ?? '');
+    if ($valid) {
+        generateCSRFToken();
+    }
+
+    return $valid;
 }
